@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ blogpost.title }}</title>
+</head>
+<body>
+    <div id="header">
+        <a href="{% url "index" %}">Main Page</a>
+        <br>
+        <br>
+    </div>
+
+    <div id="main">
+        {{ blogpost.title }}<br>
+        {{ blogpost.author.username}} - {{ blogpost.pub_date }}<br><br>
+        {{ blogpost.text }}<br>
+        <br>
+    </div>
+
+    <a href="{% url "comment" pk=blogpost.id %}">Add comment</a>
+
+    <div id="comments">
+        {% for comment in blogpost.comment_set.all %}
+        {{ comment.author.username }} - {{ comment.pub_date }}<br>
+        {{ comment.text }}<br><br>
+    {% endfor %}
+    </div>
+
+</body>
+</html>
